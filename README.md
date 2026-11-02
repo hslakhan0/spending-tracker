@@ -18,10 +18,10 @@ As a college student, I need to keep a budget, but it's hard to tell where my mo
 - Track subscriptions
 
 ## Tech Stack
-- **Language:** Java
-- **Libraries:** Built-in Java only
-- **Storage:** CSV file (`purchases.csv`)
-- **Tools:** Git, GitHub, terminal
+- Language: Java
+- Libraries: Built-in Java only
+- Storage: CSV file (purchases.csv)
+- Tools: Git, GitHub, terminal
 
 ## Design Docs
 - [Eisenhower Matrix](docs/eisenhower-matrix.pdf)
