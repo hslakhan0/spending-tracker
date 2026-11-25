@@ -2,11 +2,17 @@
 // A command-line tool that will track purchases based off your category.
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
 
 public class Main {
 
     // Program will start here and greet the user at the system.out.println
     public static void main(String[] args) {
+
+
+        // Holds any purchase that the user inputs
+        ArrayList<Purchase> purchases = new ArrayList<>();
 
         System.out.println("Welcome to HL's Spending Tracker!");
 
@@ -30,7 +36,27 @@ public class Main {
 
             // Do what the user picked
             if (choice.equals("1")) {
-                System.out.println("Adding purchases placeholder");
+                // Ask for amount and make it be a double
+                String amountText = IO.readln("Amount: ");
+                double amount = Double.parseDouble(amountText);
+
+                // Ask what the purchase was for
+                String category = IO.readln("Category: ");
+
+                // Ask for the date and it needs to be MM-DD-YYYY.
+                // Java defaults as YYYY-MM-DD so I added DateTimeFormatter
+                String dateText = IO.readln("Date (MM-DD-YYYY): ");
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+                LocalDate date = LocalDate.parse(dateText, dateFormat);
+
+                //Purchases are being saved in the list
+                Purchase purchase = new Purchase(amount, category, date);
+                purchases.add(purchase);
+                System.out.println("Purchase added! Total purchases: " + purchases.size());
+
+
+
+
             } else if (choice.equals("2")) {
                 System.out.println("Adding categories placeholder");
             } else if (choice.equals("3")) {
