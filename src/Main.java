@@ -13,6 +13,7 @@ public class Main {
 
         // Holds any purchase that the user inputs
         ArrayList<Purchase> purchases = new ArrayList<>();
+        ArrayList<String> categories = new ArrayList<>();
 
         System.out.println("Welcome to HL's Spending Tracker!");
 
@@ -58,7 +59,18 @@ public class Main {
 
 
             } else if (choice.equals("2")) {
-                System.out.println("Adding categories placeholder");
+                // Ask for the new category's name
+                String newCategory = IO.readln("New category name: ");
+
+                // Add new category only if it doesn't already exist.
+                if (categories.contains(newCategory)) {
+                    System.out.println(newCategory + " already exists.");
+                } else {
+                    categories.add(newCategory);
+                    System.out.println("Added category: " + newCategory);
+                }
+
+
             } else if (choice.equals("3")) {
                 System.out.println("Totals placeholder");
             } else if (choice.equals("4")) {
