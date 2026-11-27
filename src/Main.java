@@ -47,7 +47,7 @@ public class Main {
                 // If it detects the purchase is being added to a new category, it will create a new category
                 if (!categories.contains(category)) {
                     categories.add(category);
-                } 
+                }
 
                 // Ask for the date and it needs to be MM-DD-YYYY.
                 // Java defaults as YYYY-MM-DD so I added DateTimeFormatter
@@ -77,7 +77,31 @@ public class Main {
 
 
             } else if (choice.equals("3")) {
-                System.out.println("Totals placeholder");
+                // Get today's date so it knows which month to get information on.
+                LocalDate today = LocalDate.now();
+
+                System.out.println("Spending this month:");
+
+                // Go through every purchase in each category and add all of them up.
+                for (String category : categories) {
+                    double total = 0;
+
+                    for (Purchase purchase : purchases) {
+                        LocalDate date = purchase.getDate();
+
+                        // Check if the puchase is from the month and year it is checking for.
+                        boolean sameCategory = purchase.getCategory().equals(category);
+                        boolean sameMonth = date.getMonthValue() == today.getMonthValue();
+                        boolean sameYear = date.getYear() == today.getYear();
+
+                        if (sameCategory && sameMonth && sameYear) {
+                            total = total + purchase.getAmount();
+                        }
+                    }
+
+                    // After checking purcahses, print the category's total.
+                    System.out.println(category + ": $" + String.format("%.2f", total));
+                }
             } else if (choice.equals("4")) {
                 System.out.println("Top category placeholder");
             } else if (choice.equals("5")) {
