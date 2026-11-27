@@ -44,6 +44,11 @@ public class Main {
                 // Ask what the purchase was for
                 String category = IO.readln("Category: ");
 
+                // If it detects the purchase is being added to a new category, it will create a new category
+                if (!categories.contains(category)) {
+                    categories.add(category);
+                } 
+
                 // Ask for the date and it needs to be MM-DD-YYYY.
                 // Java defaults as YYYY-MM-DD so I added DateTimeFormatter
                 String dateText = IO.readln("Date (MM-DD-YYYY): ");
