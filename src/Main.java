@@ -102,8 +102,55 @@ public class Main {
                     // After checking purcahses, print the category's total.
                     System.out.println(category + ": $" + String.format("%.2f", total));
                 }
+
+                
             } else if (choice.equals("4")) {
-                System.out.println("Top category placeholder");
+
+                // Get today's date so we know what month it is right now
+                LocalDate today = LocalDate.now();
+
+                // Start with no top category and have all at $0, replace everytime a bigger total shows up.
+                String topCategory = "";
+                double topTotal = 0;
+
+                // For each category, go through each purchase and add up all the purchases in it.
+                for (String category : categories) {
+                    double total = 0;
+
+                // For each category, go through each purcahse
+                    for (Purchase purchase : purchases) {
+                        LocalDate date = purchase.getDate();
+
+                        // Check if this purchase is in this category and from this month and year
+                        boolean sameCategory = purchase.getCategory().equals(category);
+                        boolean sameMonth = date.getMonthValue() == today.getMonthValue();
+                        boolean sameYear = date.getYear() == today.getYear();
+
+                        if (sameCategory && sameMonth && sameYear) {
+                            total = total + purchase.getAmount();
+                        }
+                    }
+
+                    // If this category spent more than the biggest one so far, this category becomes the new top
+                    if (total > topTotal) {
+                        topCategory = category;
+                        topTotal = total;
+                    }
+                }
+
+                // Show the top category, or a message if nothing was spent this month
+                if (topCategory.equals("")) {
+                    System.out.println("No spending this month yet.");
+                } else {
+                    System.out.println("Top category: " + topCategory + " ($" + String.format("%.2f", topTotal) + ")");
+                }
+
+
+
+
+
+
+
             } else if (choice.equals("5")) {
                 System.out.println("Goodbye!");
                 running = false;
