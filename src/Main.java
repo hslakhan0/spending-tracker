@@ -1,6 +1,8 @@
 // Spending tracker
 // A command-line tool that will track purchases based off your category.
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
@@ -103,7 +105,7 @@ public class Main {
                     System.out.println(category + ": $" + String.format("%.2f", total));
                 }
 
-                
+
             } else if (choice.equals("4")) {
 
                 // Get today's date so we know what month it is right now
@@ -152,7 +154,25 @@ public class Main {
 
 
             } else if (choice.equals("5")) {
-                System.out.println("Goodbye!");
+            // Save every purchase to purchase.csv so they save until the next time.
+
+            try {
+                PrintWriter writer = new PrintWriter("purchases.csv");
+
+                // Write one line for each purchase added including date, category, and price. Ex: (11-28-2026, Food, 12.50)
+                for (Purchase purchase : purchases) {
+                    writer.println(purchase.getDate() + ", " + purchase.getCategory() + ", " + purchase.getAmount());
+                }
+
+                writer.close();
+                System.out.println("Saved " + purchases.size() + " purchases.");
+            } catch (FileNotFoundException e) {
+                // If the file can't be made, tell the user instead of completely crashing
+                System.out.println("Couldn't save purchases.csv.");
+            }
+
+
+            System.out.println("Goodbye!");
                 running = false;
             } else {
                 System.out.println("Please pick 1, 2, 3, 4, or 5.");
